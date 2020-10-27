@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PublicPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//PUBLIC ROUTE
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('publicpagecontroller.beranda');
 });
+Route::get('beranda', [PublicPageController::class, 'beranda'])->name('publicpagecontroller.beranda');
+Route::get('berita', [PublicPageController::class, 'berita'])->name('publicpagecontroller.berita');
+Route::get('berita/{id}/detail', [PublicPageController::class, 'beritaDetail'])->name('publicpagecontroller.beritadetail');
+Route::match(['get', 'post'], 'agenda', [PublicPageController::class, 'agenda'])->name('publicpagecontroller.agenda');
+Route::get('profil', [PublicPageController::class, 'profile'])->name('publicpagecontroller.profile');
+Route::get('video', [PublicPageController::class, 'video'])->name('publicpagecontroller.video');
+Route::get('gallery', [PublicPageController::class, 'gallery'])->name('publicpagecontroller.gallery');
+Route::get('kontak', [PublicPageController::class, 'kontak'])->name('publicpagecontroller.kontak');
+Route::post('kontak', [PublicPageController::class, 'kontakSubmit'])->name('publicpagecontroller.kontaksubmit');
+
+//ADMIN ROUTE

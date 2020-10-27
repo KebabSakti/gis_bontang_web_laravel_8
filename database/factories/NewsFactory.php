@@ -30,6 +30,7 @@ class NewsFactory extends Factory
             'content' => $this->faker->sentence($nbWords = 50, $variableNbWords = true),
             'tag' => $this->faker->sentence($nbWords = 1, $variableNbWords = true),
             'image' => $this->faker->imageUrl(640, 480),
+            'view' => mt_rand(0, 100),
         ];
     }
 }
