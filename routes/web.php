@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicPageController;
+use App\Http\Controllers\UserAuthentication;
+use App\Http\Controllers\UserFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,7 @@ use App\Http\Controllers\PublicPageController;
 
 //PUBLIC ROUTE
 Route::get('/', function () {
-    return redirect()->route('publicpagecontroller.beranda');
+    return redirect('beranda');
 });
 Route::get('beranda', [PublicPageController::class, 'beranda'])->name('publicpagecontroller.beranda');
 Route::get('berita', [PublicPageController::class, 'berita'])->name('publicpagecontroller.berita');
@@ -27,5 +29,18 @@ Route::get('video', [PublicPageController::class, 'video'])->name('publicpagecon
 Route::get('gallery', [PublicPageController::class, 'gallery'])->name('publicpagecontroller.gallery');
 Route::get('kontak', [PublicPageController::class, 'kontak'])->name('publicpagecontroller.kontak');
 Route::post('kontak', [PublicPageController::class, 'kontakSubmit'])->name('publicpagecontroller.kontaksubmit');
+
+//USER ROUTE (REGISTERED USER)
+Route::get('user/', function () {
+    return redirect('user/login');
+});
+Route::group(['prefix' => 'user'], function () {
+    //USER AUTH
+    Route::get('login', [UserAuthentication::class, 'login'])->name('auth.user.loginpage');
+    Route::post('login', [UserAuthentication::class, 'loginSubmit'])->name('auth.user.loginsubmit');
+    //USER FORM
+    Route::get('form', [UserFormController::class, 'form'])->name('user.form');
+    Route::post('form', [UserFormController::class, 'formSubmit'])->name('user.formsubmit');
+});
 
 //ADMIN ROUTE

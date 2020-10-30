@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Area;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class AreaFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Area::class;
 
     /**
      * Define the model's default state.
@@ -23,10 +22,11 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->uuid,
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'password' => bcrypt('buyung'), // password
+            'area_id' => $this->faker->uuid,
+            'code' => mt_rand(1000, 9999),
+            'name' => $this->faker->city,
+            'tag' => 'provinsi',
+            'caption'=> $this->faker->sentence,
         ];
     }
 }
