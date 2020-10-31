@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicPageController;
 use App\Http\Controllers\UserAuthentication;
 use App\Http\Controllers\UserFormController;
+use App\Http\Controllers\AdminAuthentication;
+use App\Http\Controllers\AdminPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +46,14 @@ Route::group(['prefix' => 'user'], function () {
 });
 
 //ADMIN ROUTE
+Route::get('admin/', function () {
+    return redirect('admin/login');
+});
+Route::group(['prefix' => 'admin'], function () {
+    //ADMIN AUTH
+    Route::get('login', [AdminAuthentication::class, 'login'])->name('auth.admin.loginpage');
+    Route::post('login', [AdminAuthentication::class, 'loginSubmit'])->name('auth.admin.loginsubmit');
+    Route::get('logout', [AdminAuthentication::class, 'logout'])->name('auth.admin.logout');
+    //ADMIN PAGES
+    Route::get('beranda', [AdminPageController::class, 'beranda'])->name('admin.beranda');
+});

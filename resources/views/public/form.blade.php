@@ -32,14 +32,23 @@
         <div class="row h-100 justify-content-center align-items-center">
           <div class="col-lg-8 col-md-12 card pt-4 pb-4 m-2">
             <h4 class="text-center mb-4">Form Pendataan</h4>
+            @if (session('message'))
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                {{ session('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            @endif
             <form id="validate-form" method="POST" action="{{ route('user.formsubmit') }}" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="form_id" value="{{App\CustomClass\IDGenerator::generate()}}">
                 <div class="input-group-icon mt-10">
                     <div class="icon"><i class="fa fa-caret-right aria-hidden="true"></i></div>
                     <select name="kelurahan" class="form-control single-input" required>
                         <option value="">- Pilih Desa / Kelurahan -</option>
                         @foreach ($areas->where('tag', 'kelurahan') as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -48,7 +57,7 @@
                     <select name="kecamatan" class="form-control single-input" required>
                         <option value=""> - Pilih Kecamatan - </option>
                         @foreach ($areas->where('tag', 'kecamatan') as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -57,7 +66,7 @@
                     <select name="kabupaten" class="form-control single-input" required>
                         <option value=""> - Pilih Kabupaten / Kota - </option>
                         @foreach ($areas->where('tag', 'kabupaten') as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -66,7 +75,7 @@
                     <select name="provinsi" class="form-control single-input" required>
                         <option value=""> - Pilih Provinsi - </option>
                         @foreach ($areas->where('tag', 'provinsi') as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -92,7 +101,7 @@
                     <select name="pendidikan" class="form-control single-input" required>
                         <option value=""> - Pendidikan Terakhir - </option>
                         @foreach ($options->where('tag', 'pendidikan')->all() as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -101,7 +110,7 @@
                     <select name="jk" class="form-control single-input" required>
                         <option value=""> - Jenis Kelamin - </option>
                         @foreach ($options->where('tag', 'jk')->all() as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -119,7 +128,7 @@
                     <select name="pekerjaan" class="form-control single-input" required>
                         <option value=""> - Pekerjaan Utama - </option>
                         @foreach ($options->where('tag', 'pekerjaan')->all() as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -128,7 +137,7 @@
                     <select name="penghasilan" class="form-control single-input" required>
                         <option value=""> - Penghasilan atau pengeluaran per bulan - </option>
                         @foreach ($options->where('tag', 'penghasilan')->all() as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -137,7 +146,7 @@
                     <select name="kepemilikan_tanah" class="form-control single-input" required>
                         <option value=""> - Status kepemilikan tanah - </option>
                         @foreach ($options->where('tag', 'kepemilikan_tanah')->all() as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -146,7 +155,7 @@
                     <select name="kepemilikan_rumah" class="form-control single-input" required>
                         <option value=""> - Status kepemilikan rumah - </option>
                         @foreach ($options->where('tag', 'kepemilikan_rumah')->all() as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -155,7 +164,7 @@
                     <select name="aset_rumah" class="form-control single-input" required>
                         <option value=""> - Aset rumah di tempat lain - </option>
                         @foreach ($options->where('tag', 'aset_rumah')->all() as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -164,7 +173,7 @@
                     <select name="aset_tanah" class="form-control single-input" required>
                         <option value=""> - Aset tanah di tempat lain - </option>
                         @foreach ($options->where('tag', 'aset_tanah')->all() as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -173,7 +182,7 @@
                     <select name="bantuan_perumahan" class="form-control single-input" required>
                         <option value=""> - Pernah mendapatkan bantuan perumahan - </option>
                         @foreach ($options->where('tag', 'bantuan_perumahan')->all() as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -182,7 +191,7 @@
                     <select name="lokasi_rumah" class="form-control single-input" required>
                         <option value=""> - Jenis kawasan lokasi rumah yang di tempati - </option>
                         @foreach ($options->where('tag', 'lokasi_rumah')->all() as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            <option value="{{$item->name}}">{{$item->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -197,7 +206,7 @@
                             <select name="pondasi" class="form-control single-input" required>
                                 <option value=""> - Pondasi - </option>
                                 @foreach ($options->where('tag', 'pondasi')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -217,7 +226,7 @@
                             <select name="kolom_balok" class="form-control single-input" required>
                                 <option value=""> - Kondisi kolom dan balok - </option>
                                 @foreach ($options->where('tag', 'kolom_balok')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -237,7 +246,7 @@
                             <select name="konstruksi_atap" class="form-control single-input" required>
                                 <option value=""> - Kondisi konstruksi atap - </option>
                                 @foreach ($options->where('tag', 'konstruksi_atap')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -260,7 +269,7 @@
                             <select name="jendela" class="form-control single-input" required>
                                 <option value=""> - Jendela/Lubang Cahaya - </option>
                                 @foreach ($options->where('tag', 'jendela')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -280,7 +289,7 @@
                             <select name="ventilasi" class="form-control single-input" required>
                                 <option value=""> - Ventilasi - </option>
                                 @foreach ($options->where('tag', 'ventilasi')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -300,7 +309,7 @@
                             <select name="kamar_mandi" class="form-control single-input" required>
                                 <option value=""> - Kepemilikan kamar mandi dan jamban - </option>
                                 @foreach ($options->where('tag', 'kamar_mandi')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -320,7 +329,7 @@
                             <select name="jarak_air" class="form-control single-input" required>
                                 <option value=""> - Jarak sumber air minum ke TPA tinja - </option>
                                 @foreach ($options->where('tag', 'jarak_air')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -329,7 +338,7 @@
                         <div class="input-group-icon mt-10">
                             <div class="icon"><i class="fa fa-images" aria-hidden="true"></i></div>
                             <input type="text" placeholder="Foto" class="single-input foto-trigger" readonly required>
-                            <input type="file" name="foto_kamar_mandi[]" class="foto" multiple>
+                            <input type="file" name="foto_jarak_air[]" class="foto" multiple>
                         </div>
                     </div>
                 </div>
@@ -340,7 +349,7 @@
                             <select name="sumber_air" class="form-control single-input" required>
                                 <option value=""> - Sumber air minum - </option>
                                 @foreach ($options->where('tag', 'sumber_air')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -360,7 +369,7 @@
                             <select name="sumber_listrik" class="form-control single-input" required>
                                 <option value=""> - Sumber Listrik - </option>
                                 @foreach ($options->where('tag', 'sumber_listrik')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -392,7 +401,7 @@
                             <select name="material_atap" class="form-control single-input" required>
                                 <option value=""> - Material atap terluas - </option>
                                 @foreach ($options->where('tag', 'material_atap')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -412,7 +421,7 @@
                             <select name="kondisi_atap" class="form-control single-input" required>
                                 <option value=""> - Kondisi atap - </option>
                                 @foreach ($options->where('tag', 'kondisi_atap')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -432,7 +441,7 @@
                             <select name="material_dinding" class="form-control single-input" required>
                                 <option value=""> - Material dinding terluas - </option>
                                 @foreach ($options->where('tag', 'material_dinding')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -452,7 +461,7 @@
                             <select name="kondisi_dinding" class="form-control single-input" required>
                                 <option value=""> - Kondisi Dinding - </option>
                                 @foreach ($options->where('tag', 'kondisi_dinding')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -472,7 +481,7 @@
                             <select name="material_lantai" class="form-control single-input" required>
                                 <option value=""> - Material lantai terluas - </option>
                                 @foreach ($options->where('tag', 'material_lantai')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -492,7 +501,7 @@
                             <select name="kondisi_lantai" class="form-control single-input" required>
                                 <option value=""> - Kondisi lantai - </option>
                                 @foreach ($options->where('tag', 'kondisi_lantai')->all() as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -519,7 +528,6 @@
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script>
         $(function() {
-            
             //input file function
             $('.foto-trigger').click(function() {
                 element = $(this);
@@ -538,6 +546,13 @@
                     fotoInput.off('change');
                 });
             });
+
+            // $('button').click(function(e) {
+            //     e.preventDefault();
+            //     if(confirm('Proses upload foto memerlukan waktu beberapa menit tergantung jumlah foto, jangan refresh atau tutup browser selama proses berlangsung. Lanjutkan ?')){
+            //         $('form').submit();
+            //     }
+            // });
 
         });
     </script>

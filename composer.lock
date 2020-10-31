@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5579bc3e639518f1f6f701eb54b650e9",
+    "content-hash": "f57a8b200e9d781703bd2c034b4d4079",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -57,51 +57,6 @@
                 "stack"
             ],
             "time": "2020-05-31T07:17:05+00:00"
-        },
-        {
-            "name": "bluemmb/faker-picsum-photos-provider",
-            "version": "v1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bluemmb/Faker-PicsumPhotos.git",
-                "reference": "3c21793ba349f0b74567ebfa6ce325dc3bcefafe"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bluemmb/Faker-PicsumPhotos/zipball/3c21793ba349f0b74567ebfa6ce325dc3bcefafe",
-                "reference": "3c21793ba349f0b74567ebfa6ce325dc3bcefafe",
-                "shasum": ""
-            },
-            "require": {
-                "fzaninotto/faker": "~1",
-                "php": "^5.3.3 || ^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Bluemmb\\Faker\\": "."
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mohammad Eftekhari",
-                    "email": "bluemmb22@gmail.com"
-                }
-            ],
-            "description": "picsum.photos provider for Faker",
-            "keywords": [
-                "faker",
-                "picsum.photos",
-                "provider"
-            ],
-            "time": "2018-08-18T10:17:02+00:00"
         },
         {
             "name": "brick/math",
@@ -547,56 +502,6 @@
                 "laravel"
             ],
             "time": "2020-09-07T11:48:52+00:00"
-        },
-        {
-            "name": "fzaninotto/faker",
-            "version": "v1.9.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fc10d778e4b84d5bd315dad194661e091d307c6f",
-                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.3 || ^7.0"
-            },
-            "require-dev": {
-                "ext-intl": "*",
-                "phpunit/phpunit": "^4.8.35 || ^5.7",
-                "squizlabs/php_codesniffer": "^2.9.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Faker\\": "src/Faker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Zaninotto"
-                }
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "time": "2019-12-12T13:22:17+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -2191,6 +2096,116 @@
                 "uuid"
             ],
             "time": "2020-08-18T17:17:46+00:00"
+        },
+        {
+            "name": "spatie/image-optimizer",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/image-optimizer.git",
+                "reference": "9c1d470e34b28b715d25edb539dd6c899461527c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/image-optimizer/zipball/9c1d470e34b28b715d25edb539dd6c899461527c",
+                "reference": "9c1d470e34b28b715d25edb539dd6c899461527c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "php": "^7.2",
+                "psr/log": "^1.0",
+                "symfony/process": "^4.2|^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0",
+                "symfony/var-dumper": "^4.2|^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\ImageOptimizer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily optimize images using PHP",
+            "homepage": "https://github.com/spatie/image-optimizer",
+            "keywords": [
+                "image-optimizer",
+                "spatie"
+            ],
+            "time": "2019-11-25T12:29:24+00:00"
+        },
+        {
+            "name": "spatie/laravel-image-optimizer",
+            "version": "1.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-image-optimizer.git",
+                "reference": "8c7cb83f5bd0dc5484c9918fdb0a9bf608a29c2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-image-optimizer/zipball/8c7cb83f5bd0dc5484c9918fdb0a9bf608a29c2c",
+                "reference": "8c7cb83f5bd0dc5484c9918fdb0a9bf608a29c2c",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^6.0|^7.0|^8.0",
+                "php": "^7.2",
+                "spatie/image-optimizer": "^1.2.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "orchestra/testbench": "^4.0|^5.0|^6.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\LaravelImageOptimizer\\ImageOptimizerServiceProvider"
+                    ],
+                    "aliases": {
+                        "ImageOptimizer": "Spatie\\LaravelImageOptimizer\\Facades\\ImageOptimizer"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelImageOptimizer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Optimize images in your Laravel app",
+            "homepage": "https://github.com/spatie/laravel-image-optimizer",
+            "keywords": [
+                "laravel-image-optimizer",
+                "spatie"
+            ],
+            "time": "2020-09-08T19:46:59+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4245,6 +4260,51 @@
     ],
     "packages-dev": [
         {
+            "name": "bluemmb/faker-picsum-photos-provider",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bluemmb/Faker-PicsumPhotos.git",
+                "reference": "3c21793ba349f0b74567ebfa6ce325dc3bcefafe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bluemmb/Faker-PicsumPhotos/zipball/3c21793ba349f0b74567ebfa6ce325dc3bcefafe",
+                "reference": "3c21793ba349f0b74567ebfa6ce325dc3bcefafe",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "~1",
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bluemmb\\Faker\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mohammad Eftekhari",
+                    "email": "bluemmb22@gmail.com"
+                }
+            ],
+            "description": "picsum.photos provider for Faker",
+            "keywords": [
+                "faker",
+                "picsum.photos",
+                "provider"
+            ],
+            "time": "2018-08-18T10:17:02+00:00"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "1.3.1",
             "source": {
@@ -4536,6 +4596,56 @@
                 "whoops"
             ],
             "time": "2020-10-17T09:00:00+00:00"
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "v1.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fc10d778e4b84d5bd315dad194661e091d307c6f",
+                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.8.35 || ^5.7",
+                "squizlabs/php_codesniffer": "^2.9.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2019-12-12T13:22:17+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
