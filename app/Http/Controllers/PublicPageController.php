@@ -26,7 +26,7 @@ class PublicPageController extends Controller
             return $item->news_id;
         });
         $excludeRightNews->push($trendingTop[0]->news_id);
-        $rightNews = News::whereNotIn('news_id', $excludeRightNews->toArray())->orderBy('view', 'desc')->limit(6)->get();
+        $rightNews = News::whereNotIn('news_id', $excludeRightNews->toArray())->orderBy('view', 'desc')->limit(5)->get();
         $newNews = News::orderBy('created_at', 'desc')->limit(6)->get();
 
         //gallery
@@ -53,9 +53,12 @@ class PublicPageController extends Controller
     }
 
     public function beritaDetail($id)
-    {
+    {        
         $newsDetail = News::findOrFail($id);
         $relatedNews = News::where('id', '!=', $id)->inRandomOrder()->limit(5)->get();
+
+        //increment view
+        $newsDetail->increment('view');
 
         return view('public.berita_detail', [
             'newsDetail' => $newsDetail,
@@ -136,7 +139,7 @@ class PublicPageController extends Controller
 
     public function gallery()
     {
-        $images = Gallery::orderBy('created_at', 'desc')->paginate(9);
+        $images = Gallery::orderBy('created_at', 'desc')->paginate(20);
 
         return view('public.gallery', [
             'images' => $images,

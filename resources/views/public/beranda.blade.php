@@ -13,10 +13,10 @@
                     <!-- Trending Top -->
                     <div class="trending-top mb-30">
                         <div class="trend-top-img">
-                            <img src="{{$trendingTop[0]->image}}" alt="" class="lazy" data-src="{{$trendingTop[0]->image}}">
+                            <img src="{{ asset('foto/'.$trendingTop[0]->image) }}" alt="" class="lazy" data-src="{{ asset('foto/'.$trendingTop[0]->image) }}">
                             <div class="trend-top-cap">
                                 <span>{{$trendingTop[0]->tag}}</span>
-                                <h2><a href="{{ route('publicpagecontroller.beritadetail', ['id'=>$trendingTop[0]->id]) }}">{{$trendingTop[0]->title}}</a></h2>
+                                <h2><a href="{{ route('publicpagecontroller.beritadetail', ['id'=>$trendingTop[0]->id]) }}">{{Str::limit($trendingTop[0]->title, 100)}}</a></h2>
                             </div>
                         </div>
                     </div>
@@ -27,11 +27,11 @@
                                 <div class="col-lg-4">
                                     <div class="single-bottom mb-35">
                                         <div class="trend-bottom-img mb-30">
-                                            <img src="{{$item->image}}" alt="" class="lazy" data-src="{{$item->image}}">
+                                            <img src="{{ asset('foto/'.$item->image) }}" alt="" class="lazy" data-src="{{ asset('foto/'.$item->image) }}">
                                         </div>
                                         <div class="trend-bottom-cap">
                                             <span class="color1">{{$item->tag}}</span>
-                                            <h4><a href="{{ route('publicpagecontroller.beritadetail', ['id'=>$item->id]) }}">{{$item->title}}</a></h4>
+                                            <h4><a href="{{ route('publicpagecontroller.beritadetail', ['id'=>$item->id]) }}">{{Str::limit($item->title, 100)}}</a></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -39,16 +39,16 @@
                         </div>
                     </div>
                 </div>
-                <!-- Riht content -->
+                <!-- Right content -->
                 <div class="col-lg-4">
                     @foreach ($rightNews as $item)
                         <div class="trand-right-single d-flex">
                             <div class="trand-right-img">
-                                <img src="{{$item->image}}" width="100" alt="" class="lazy" data-src="{{$item->image}}">
+                                <img src="{{ asset('foto/'.$item->image) }}" width="100" alt="" class="lazy" data-src="{{ asset('foto/'.$item->image) }}">
                             </div>
                             <div class="trand-right-cap">
                                 <span class="color1">{{$item->tag}}</span>
-                                <h4><a href="{{ route('publicpagecontroller.beritadetail', ['id'=>$item->id]) }}">{{$item->title}}</a></h4>
+                                <h4><a href="{{ route('publicpagecontroller.beritadetail', ['id'=>$item->id]) }}">{{Str::limit($item->title, 100)}}</a></h4>
                             </div>
                         </div>
                     @endforeach
@@ -149,11 +149,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row gallery-item">
+            <div class="grid">
+                <div class="grid-sizer"></div>
                 @foreach ($galleries as $item)
-                    <div class="col-md-4">
-                        <a href="{{$item->image}}" class="img-pop-up">
-                            <div class="single-gallery-image" style="background: url({{$item->image}}); background-position:center center; border-radius:6px;"></div>
+                    <div class="grid-item">
+                        <a href="{{asset('foto/'.$item->image)}}" class="img-pop-up">
+                            {{-- <div class="" style="background: url({{asset('foto/'.$item->image)}}); background-position:center center; border-radius:6px;"></div> --}}
+                            <img src="{{ asset('foto/'.$item->image) }}">
                         </a>
                     </div>
                 @endforeach
@@ -181,12 +183,12 @@
                         @foreach ($newNews as $item)
                             <div class="weekly2-single">
                                 <div class="weekly2-img">
-                                    <img src="{{$item->image}}" alt="" class="lazy" data-src="{{$item->image}}">
+                                    <img src="{{ asset('foto/'.$item->image) }}" alt="" class="lazy" data-src="{{ asset('foto/'.$item->image) }}">
                                 </div>
                                 <div class="weekly2-caption">
                                     <span class="color1">{{$item->tag}}</span>
                                     <p>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at, 'Asia/Kuala_Lumpur')->format('d M Y')}}</p>
-                                    <h4><a href="{{ route('publicpagecontroller.beritadetail', ['id'=>$item->id]) }}">{{$item->title}}</a></h4>
+                                    <h4><a href="{{ route('publicpagecontroller.beritadetail', ['id'=>$item->id]) }}">{{Str::limit($item->title, 100)}}</a></h4>
                                 </div>
                             </div>
                         @endforeach

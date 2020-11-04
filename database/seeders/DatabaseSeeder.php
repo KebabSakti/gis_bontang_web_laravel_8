@@ -20,6 +20,6 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Video::factory(5)->create();
         // \App\Models\User::factory(5)->create();
         // \App\Models\Option::factory(1)->create();
-        \App\Models\Admin::factory(1)->create();
+        \App\Models\StaticContent::factory(1)->create();
     }
 }

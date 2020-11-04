@@ -11,7 +11,7 @@
                         @foreach ($news as $item)
                             <article class="blog_item">
                                 <div class="blog_item_img">
-                                    <img class="card-img rounded-0" src="{{ $item->image }}" alt="">
+                                    <img class="card-img rounded-0" src="{{ asset('foto/'.$item->image) }}" alt="">
                                     <a href="{{ route('publicpagecontroller.beritadetail', ['id'=>$item->id]) }}" class="blog_item_date">
                                         <h3>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at, 'Asia/Kuala_Lumpur')->format('d')}}</h3>
                                         <p>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at, 'Asia/Kuala_Lumpur')->format('M')}}</p>
@@ -59,7 +59,7 @@
                             <h3 class="widget_title">Berita Terbaru</h3>
                             @foreach ($newNews as $item)
                                 <div class="media post_item">
-                                    <img src="{{ $item->image }}" alt="" class="lazy" data-src="{{$item->image}}" width="100">
+                                    <img src="{{ asset('foto/'.$item->image) }}" alt="" class="lazy" data-src="{{asset('foto/'.$item->image)}}" width="100">
                                     <div class="media-body">
                                         <a href="{{ route('publicpagecontroller.beritadetail', ['id'=>$item->id]) }}">
                                             <h3>{{Str::limit($item->title, 20)}}</h3>

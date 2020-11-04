@@ -10,4 +10,9 @@ class Form extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function fotos()
+    {
+        return $this->hasMany('App\Models\Foto', 'form_id', 'form_id');
+    }
 }

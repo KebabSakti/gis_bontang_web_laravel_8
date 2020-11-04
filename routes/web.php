@@ -6,6 +6,15 @@ use App\Http\Controllers\UserAuthentication;
 use App\Http\Controllers\UserFormController;
 use App\Http\Controllers\AdminAuthentication;
 use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\OptionController;
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\StaticContentController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\FormulirController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,4 +65,24 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('logout', [AdminAuthentication::class, 'logout'])->name('auth.admin.logout');
     //ADMIN PAGES
     Route::get('beranda', [AdminPageController::class, 'beranda'])->name('admin.beranda');
+    Route::post('option/ajax', [OptionController::class, 'ajax'])->name('option.ajax');
+    Route::resource('option', OptionController::class);
+    Route::post('area/ajax', [AreaController::class, 'ajax'])->name('area.ajax');
+    Route::get('area/ajax/code', [AreaController::class, 'ajaxCode'])->name('area.ajaxcode');
+    Route::resource('area', AreaController::class);
+    Route::post('news/ajax', [NewsController::class, 'ajax'])->name('news.ajax');
+    Route::resource('news', NewsController::class);
+    Route::post('agenda/ajax', [AgendaController::class, 'ajax'])->name('agenda.ajax');
+    Route::resource('agenda', AgendaController::class);
+    Route::post('static/ajax', [StaticContentController::class, 'ajax'])->name('static.ajax');
+    Route::resource('static', StaticContentController::class);
+    Route::post('video/ajax', [VideoController::class, 'ajax'])->name('video.ajax');
+    Route::resource('video', VideoController::class);
+    Route::post('pesan/ajax', [ContactController::class, 'ajax'])->name('pesan.ajax');
+    Route::resource('pesan', ContactController::class);
+    Route::post('gallery/ajax', [GalleryController::class, 'ajax'])->name('gallery.ajax');
+    Route::resource('gallery', GalleryController::class);
+    Route::post('formulir/ajax', [FormulirController::class, 'ajax'])->name('formulir.ajax');
+    Route::get('formulir/{id}/id/{tag}/foto', [FormulirController::class, 'foto'])->name('formulir.foto');
+    Route::resource('formulir', FormulirController::class);
 });

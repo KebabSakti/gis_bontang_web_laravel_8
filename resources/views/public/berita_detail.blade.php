@@ -11,14 +11,14 @@
                         <!-- Trending Tittle -->
                         <div class="about-right mb-90">
                             <div class="about-img">
-                                <img src="{{ $newsDetail->image }}" alt="" class="lazy" data-src="{{$newsDetail->image}}">
+                                <img src="{{ asset('foto/'.$newsDetail->image) }}" alt="" class="lazy" data-src="{{asset('foto/'.$newsDetail->image)}}">
                             </div>
                             <div class="section-tittle mb-30 pt-30">
                                 <h3>{{$newsDetail->title}}</h3>
                             </div>
                             <div class="about-prea">
                                 <p class="about-pera1 mb-25 text-justify">
-                                    {{$newsDetail->content}}
+                                    {!! nl2br(e($newsDetail->content), false) !!}
                                 </p>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                                 <h3 class="widget_title">Berita Terkait</h3>
                                 @foreach ($relatedNews as $item)
                                     <div class="media post_item">
-                                        <img src="{{ $item->image }}" alt="" class="lazy" data-src="{{$item->image}}" width="100">
+                                        <img src="{{ asset('foto/'.$item->image) }}" alt="" class="lazy" data-src="{{'foto/'.$item->image}}" width="100">
                                         <div class="media-body">
                                             <a href="{{ route('publicpagecontroller.beritadetail', ['id'=>$item->id]) }}">
                                                 <h3>{{Str::limit($item->title, 20)}}</h3>

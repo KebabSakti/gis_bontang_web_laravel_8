@@ -43,6 +43,8 @@
             <form id="validate-form" method="POST" action="{{ route('user.formsubmit') }}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="form_id" value="{{App\CustomClass\IDGenerator::generate()}}">
+                <input type="hidden" name="user_id" value="{{Auth::user()->user_id}}">
+                <input type="hidden" name="name" value="{{Auth::user()->name}}">
                 <div class="input-group-icon mt-10">
                     <div class="icon"><i class="fa fa-caret-right aria-hidden="true"></i></div>
                     <select name="kelurahan" class="form-control single-input" required>

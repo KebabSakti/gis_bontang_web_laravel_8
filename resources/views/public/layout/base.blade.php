@@ -6,7 +6,6 @@
         <title>GIS BONTANG</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="site.webmanifest">
 		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/logo/logo-bontang-only.png') }}">
 
 		<!-- CSS here -->
@@ -38,6 +37,34 @@
                     -webkit-animation-iteration-count: infinite;
                     -webkit-animation-name: placeholderShimmer;
                     -webkit-animation-timing-function: linear;
+                }
+
+                .grid {
+                    background: #FFF;
+                }
+
+                /* clear fix */
+                .grid:after {
+                    content: '';
+                    display: block;
+                    clear: both;
+                }
+
+                /* ---- .grid-item ---- */
+
+                .grid-sizer,
+                .grid-item {
+                    width: 32.7%;
+                    margin-bottom: 10px;
+                }
+
+                .grid-item {
+                    float: left;
+                }
+
+                .grid-item img {
+                    display: block;
+                    width: 100%;
                 }
             </style>
    </head>
@@ -256,10 +283,27 @@
 
         <!-- fancybox -->
         <script src="{{ asset('assets/js/fancybox-master/dist/jquery.fancybox.min.js') }}"></script>
+
+        <!-- Masonry Staggered Grid -->
+        <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
         
 		<!-- Jquery Plugins, main Jquery -->	
         <script src="{{ asset('assets/js/plugins.js') }}"></script>
         <script src="{{ asset('assets/js/main.js') }}"></script>
+
+        <script>
+            var $grid = $('.grid').imagesLoaded( function() {
+                // init Masonry after all images have loaded
+                $grid.masonry({
+                    itemSelector: '.grid-item',
+                    percentPosition: true,
+                    columnWidth: '.grid-sizer',
+                    gutter: 10,
+                    percentPosition: true,
+                });
+            });
+        </script>
 
         <!-- App scripts -->
         @stack("scripts")

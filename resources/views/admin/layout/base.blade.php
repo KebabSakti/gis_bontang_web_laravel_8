@@ -15,17 +15,74 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/font-awesome/css/font-awesome.min.css') }}">
     <!-- NProgress -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/nprogress/nprogress.css') }}">
+    <!-- Data Table -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/r-2.2.6/datatables.min.css"/>
+    <!-- FancyBox -->
+    <link href="{{ asset('assets/js/fancybox-master/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
     <!-- Admin Theme Style -->
     <link rel="stylesheet" href="{{ asset('assets/css/admin.min.css') }}">
+    <style>
+        .dataTables_wrapper .dataTables_processing {
+            height: 50px;
+            background-color: #2A3F54;
+            border-radius: 25px;
+            border: none;
+        }
+
+        .grid {
+            background: #FFF;
+        }
+
+        /* clear fix */
+        .grid:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /* ---- .grid-item ---- */
+
+        .grid-sizer,
+        .grid-item {
+            width: 32.7%;
+            margin-bottom: 10px;
+        }
+
+        .grid-item {
+            float: left;
+        }
+
+        .grid-item img {
+            display: block;
+            width: 100%;
+        }
+    </style>
   </head>
 
   <body class="nav-md">
+    
+    <!-- Modal -->
+    <div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="mainModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                Memuat..
+            </div>
+        </div>
+        </div>
+    </div>
+
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="{{ route('admin.beranda') }}" class="site_title"><span>GIS BONTANG</span></a>
+              <a href="{{ route('admin.beranda') }}" class="site_title"><i class="fa fa-map"></i> <span>GIS BONTANG</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -36,20 +93,51 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li class="active">
+                  <li>
                       <a href="{{ route('admin.beranda') }}">
                           <i class="fa fa-home"></i> Beranda
                       </a>
                   </li>
                   <li><a><i class="fa fa-cog"></i> Master Data <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
+                      <li><a href="{{ route('option.index') }}">Formulir</a></li>
+                      <li><a href="{{ route('area.index') }}">Area</a></li>
                     </ul>
+                  </li>
+                  <li>
+                    <a href="{{ route('news.index') }}">
+                        <i class="fa fa-file"></i> Berita
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('agenda.index') }}">
+                        <i class="fa fa-calendar"></i> Agenda
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('static.index') }}">
+                        <i class="fa fa-briefcase"></i> Konten Statis
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('video.index') }}">
+                        <i class="fa fa-youtube-play"></i> Video
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('pesan.index') }}">
+                        <i class="fa fa-comments"></i> Pesan
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('gallery.index') }}">
+                        <i class="fa fa-photo"></i> Gallery
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('formulir.index') }}">
+                        <i class="fa fa-newspaper-o"></i> Formulir
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -75,76 +163,35 @@
                         <a class="dropdown-item"  href="{{ route('auth.admin.logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                     </div>
                   </li>
-  
-                  {{-- <li role="presentation" class="nav-item dropdown open">
-                    <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
-                      <i class="fa fa-envelope-o"></i>
-                      <span class="badge bg-green">6</span>
-                    </a>
-                    <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                      <li class="nav-item">
-                        <a class="dropdown-item">
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                          <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                          <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="dropdown-item">
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                          <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                          <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="dropdown-item">
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                          <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                          <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="dropdown-item">
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                          <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                          <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <div class="text-center">
-                          <a class="dropdown-item">
-                            <strong>See All Alerts</strong>
-                            <i class="fa fa-angle-right"></i>
-                          </a>
-                        </div>
-                      </li>
-                    </ul>
-                  </li> --}}
                 </ul>
               </nav>
             </div>
           </div>
         <!-- /top navigation -->
+          
+        @if (session('message'))
+
+          <div class="alert alert-info alert-dismissible fade show" role="alert" style="position: absolute; right:20px; top:60px; z-index:999999;">
+            {{ session('message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+        @endif
+
+        @if ($errors->any())
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert" style="position: absolute; right:20px; top:60px; z-index:999999;">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          
+        @endif
 
         <!-- page content -->
         @yield('content')
@@ -170,7 +217,20 @@
     <script src="{{ asset('assets/vendors/fastclick/lib/fastclick.js') }}"></script>
     <!-- NProgress -->
     <script src="{{ asset('assets/vendors/nprogress/nprogress.js') }}"></script>
+    <!-- Datatable -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/r-2.2.6/datatables.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/dtpipeline.js') }}"></script>
+    <!-- fancybox -->
+    <script src="{{ asset('assets/js/fancybox-master/dist/jquery.fancybox.min.js') }}"></script>
+    <!-- Masonry Staggered Grid -->
+    {{-- <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> --}}
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('assets/js/admin.min.js') }}"></script>
+    <!-- Custom Admin Script -->
+    <script src="{{ asset('assets/js/admin.custom.js') }}"></script>
+
+    <!-- App scripts -->
+    @stack("scripts")
   </body>
 </html>

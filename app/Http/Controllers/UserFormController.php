@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\CustomClass\IDGenerator;
+use App\CustomClass\FileUploader;
 
 use App\Models\Option;
 use App\Models\Area;
@@ -22,7 +23,7 @@ class UserFormController extends Controller
     public function form()
     {
         $areas = Area::all();
-        $options = Option::all();
+        $options = Option::where('active', 1)->get();
 
         return view('public.form', [
             'areas' => $areas,
@@ -60,7 +61,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'form',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -68,8 +69,8 @@ class UserFormController extends Controller
                 Foto::create([
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
-                    'tag' => 'form',
-                    'foto' => $this->uploadFoto($item),
+                    'tag' => 'pondasi',
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -77,8 +78,8 @@ class UserFormController extends Controller
                 Foto::create([
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
-                    'tag' => 'form',
-                    'foto' => $this->uploadFoto($item),
+                    'tag' => 'kolom_balok',
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -87,7 +88,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'konstruksi_atap',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -96,7 +97,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'jendela',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -105,7 +106,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'ventilasi',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -114,7 +115,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'kamar_mandi',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -123,7 +124,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'jarak_air',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -132,7 +133,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'sumber_air',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -141,7 +142,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'sumber_listrik',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -150,7 +151,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'material_atap',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -159,7 +160,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'kondisi_atap',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -168,7 +169,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'material_dinding',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -177,7 +178,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'kondisi_dinding',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -186,7 +187,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'material_lantai',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
 
@@ -195,7 +196,7 @@ class UserFormController extends Controller
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
                     'tag' => 'kondisi_lantai',
-                    'foto' => $this->uploadFoto($item),
+                    'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
         });
