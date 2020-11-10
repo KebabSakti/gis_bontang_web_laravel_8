@@ -7,13 +7,13 @@
         <h3 class="text-heading">Profil</h3><hr>
         <div>
             <p class="text-justify">
-                {{$profile->caption}}
+                {{$profile->content}}
             </p>
         </div>
         <h3 class="text-heading mt-100">Visi & Misi</h3><hr>
         <div>
             <p class="text-justify">
-                {{$vision->caption}}
+                {{$vision->content}}
             </p>
         </div>
     </div>

@@ -14,6 +14,7 @@ use App\Models\Profile;
 use App\Models\Vision;
 use App\Models\Video;
 use App\Models\GuestBook;
+use App\Models\StaticContent;
 
 class PublicPageController extends Controller
 {
@@ -117,8 +118,8 @@ class PublicPageController extends Controller
 
     public function profile()
     {
-        $profile = Profile::first();
-        $vision = Vision::first();
+        $profile = StaticContent::where('tag', 'profil')->first();
+        $vision = StaticContent::where('tag', 'visi')->first();
 
         return view('public.profile', [
             'profile' => $profile,

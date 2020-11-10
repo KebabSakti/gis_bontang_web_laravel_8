@@ -5,7 +5,7 @@
 <main>
     <div class="container box_1170 pt-30 pb-100">
         <h3 class="text-heading">Agenda</h3><hr>
-        <div>
+        <div class="table-responsive">
             <table class="table table-bordered table-hover datatable" style="font-size: 0.6em;">
                 <thead>
                     <tr>
