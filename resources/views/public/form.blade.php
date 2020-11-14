@@ -81,19 +81,28 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="input-group-icon mt-10">
-                    <div class="icon"><i class="fa fa-images" aria-hidden="true"></i></div>
-                    <input type="text" placeholder="Foto" class="single-input foto-trigger" readonly>
-                    <input type="file" name="foto[]" class="foto" multiple>
-                </div>
                 <div class="mt-30" style="border-bottom: 0.5px solid #efefef;">
                     <h6>I. IDENTITAS PENGHUNI RUMAH</h6>
                 </div>
                 <div class="mt-10">
-                    <input type="number" min="0" name="nomor_urut" placeholder="Nomor Urut" class="single-input" required>
-                </div>
-                <div class="mt-10">
                     <input type="text" name="nama_lengkap" placeholder="Nama Lengkap" class="single-input" required>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mt-10">
+                            <input type="text" name="lat" placeholder="Kordinat (Latitude)" class="single-input" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mt-10">
+                            <input type="text" name="lng" placeholder="Kordinat (Longitude)" class="single-input" required>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group mt-10">
+                            <button type="button" class="genric-btn info radius lokasi">Lokasi</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="mt-10">
                     <input type="number" min="0" name="usia" placeholder="Usia (Tahun)" class="single-input" required>
@@ -116,8 +125,33 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="mt-10">
-                    <input type="text" name="nik" placeholder="Nomor KTP (NIK)" class="single-input" required>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="input-group mt-10">
+                            <input type="text" name="nik" placeholder="Nomor KTP (NIK)" class="single-input" required>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group-icon mt-10">
+                            <div class="icon"><i class="fa fa-images" aria-hidden="true"></i></div>
+                            <input type="text" placeholder="Foto" class="single-input foto-trigger" readonly required>
+                            <input type="file" name="foto_ktp[]" class="foto" multiple>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="input-group mt-10">
+                            <input type="text" name="no_kk" placeholder="Nomor KK" class="single-input" required>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group-icon mt-10">
+                            <div class="icon"><i class="fa fa-images" aria-hidden="true"></i></div>
+                            <input type="text" placeholder="Foto" class="single-input foto-trigger" readonly required>
+                            <input type="file" name="foto_kk[]" class="foto" multiple>
+                        </div>
+                    </div>
                 </div>
                 <div class="mt-10">
                     <input type="number" min="1" name="jumlah_kk" placeholder="Jumlah KK dalam 1 rumah" class="single-input" required>
@@ -549,11 +583,40 @@
                 });
             });
 
+            $('.lokasi').click(function() {
+                if(confirm('Browser akan meminta izin lokasi device anda, disarankan untuk menggunakan hp untuk akurasi yang lebih baik. Lanjutkan ?')){
+                    var options = {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 0
+                    };
+
+                    function success(pos) {
+                        var crd = pos.coords;
+
+                        // console.log('Your current position is:');
+                        // console.log(`Latitude : ${crd.latitude}`);
+                        // console.log(`Longitude: ${crd.longitude}`);
+                        // console.log(`More or less ${crd.accuracy} meters.`);
+
+                        $('input[name="lat"]').val(crd.latitude);
+                        $('input[name="lng"]').val(crd.longitude);
+                    }
+
+                    function error(err) {
+                        // console.warn(`ERROR(${err.code}): ${err.message}`);
+                        alert('Gagal mendapatkan lokasi device, coba beberapa saat lagi');
+                    }
+
+                    navigator.geolocation.getCurrentPosition(success, error, options);
+                }
+            });
+
             // $('button').click(function(e) {
             //     e.preventDefault();
-            //     if(confirm('Proses upload foto memerlukan waktu beberapa menit tergantung jumlah foto, jangan refresh atau tutup browser selama proses berlangsung. Lanjutkan ?')){
-            //         $('form').submit();
-            //     }
+                // if(confirm('Proses upload foto memerlukan waktu beberapa menit tergantung jumlah foto, jangan refresh atau tutup browser selama proses berlangsung. Lanjutkan ?')){
+                //     $('form').submit();
+                // }
             // });
 
         });

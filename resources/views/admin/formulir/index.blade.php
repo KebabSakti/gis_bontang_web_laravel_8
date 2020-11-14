@@ -18,9 +18,9 @@
           <div class="x_panel">
             <div class="x_title">
               <h2>Data Formulir</h2>
-              {{-- <div class="float-right">
-                <button type="button" data-target="{{ route('news.create') }}" class="btn btn-primary modal-trigger">Tambah Data</button>
-              </div> --}}
+              <div class="float-right">
+                <button type="button" data-target="{{ route('formulir.export') }}" class="btn btn-info modal-trigger">Rekap Data</button>
+              </div>
               <div class="clearfix"></div>
             </div>
             <div class="x_content table-responsive">
@@ -28,6 +28,8 @@
                     <thead>
                         <tr>
                             <th>Oleh</th>
+                            <th>Nama Lengkap</th>
+                            <th>NIK</th>
                             <th>Kelurahan</th>
                             <th>Kecamatan</th>
                             <th>Kabupaten</th>
@@ -66,12 +68,14 @@ $(function() {
                 null,
                 null,
                 null,
+                null,
+                null,
                 {'searchable':false, 'orderable':true},
                 {'searchable':false, 'orderable':true},
                 {'searchable':false, 'orderable':false},
                 {'searchable':false, 'orderable':false},
             ],
-            order: [[6, "desc"]],
+            order: [[7, "desc"]],
             ajax: $.fn.dataTable.pipeline({
                 url: '{!! route('formulir.ajax') !!}',
                 method: 'POST',

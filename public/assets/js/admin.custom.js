@@ -22,6 +22,17 @@ $(function(){
 
             element.prop("disabled", false).text(text);
 
+            if ($(".export-rangepicker").length > 0) {
+                $(".export-rangepicker").daterangepicker({
+                    startDate: moment().startOf("month"),
+                    endDate: moment().endOf("month"),
+                    maxDate: moment().endOf("month"),
+                    locale: {
+                        format: "DD/MM/YYYY",
+                    },
+                });
+            }
+
             // if($('[data-fancybox="preview"]').length > 0) {
             //     $('[data-fancybox="preview"]').fancybox({
             //         thumbs : {
@@ -37,6 +48,7 @@ $(function(){
             //         format: "DD/MM/YYYY",
             //     },
             // });
+            
         });
     });
 

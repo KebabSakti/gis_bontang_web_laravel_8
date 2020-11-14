@@ -20,9 +20,11 @@
             <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css') }}">
             <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
             <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
-            <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
             <link href="{{ asset('assets/js/fancybox-master/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
             <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/r-2.2.6/datatables.min.css"/>
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+            <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
             <style>
                 .lazy {
                     background: #f6f7f8;
@@ -144,6 +146,7 @@
                                             <li><a href="{{ route('publicpagecontroller.video') }}">Video</a></li>
                                             <li><a href="{{ route('publicpagecontroller.gallery') }}">Gallery</a></li>
                                             <li><a href="{{ route('publicpagecontroller.kontak') }}">Kontak</a></li>
+                                            <li><a href="{{ route('publicpagecontroller.peta') }}">Peta</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -283,6 +286,10 @@
 
         <!-- fancybox -->
         <script src="{{ asset('assets/js/fancybox-master/dist/jquery.fancybox.min.js') }}"></script>
+
+        <!-- Leaflet -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
 
         <!-- Masonry Staggered Grid -->
         <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>

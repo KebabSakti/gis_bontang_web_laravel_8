@@ -15,6 +15,8 @@ use App\Models\Vision;
 use App\Models\Video;
 use App\Models\GuestBook;
 use App\Models\StaticContent;
+use App\Models\Map;
+use App\Models\Form;
 
 class PublicPageController extends Controller
 {
@@ -167,5 +169,21 @@ class PublicPageController extends Controller
         GuestBook::create($param->except('_token'));
 
         return redirect()->back()->with('message','Terima kasih telah menghubungi, kami akan respon pesan anda secepatnya');
+    }
+
+    public function peta()
+    {
+        return view('public.peta');
+    }
+
+    public function petaAjax(Request $request)
+    {
+        $form = Form::all();
+        $poly = Map::all();
+
+        return response()->json([
+            'forms' => $form->toArray(),
+            'polies' => $poly->toArray(),
+        ]);
     }
 }

@@ -15,4 +15,9 @@ class Form extends Model
     {
         return $this->hasMany('App\Models\Foto', 'form_id', 'form_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id', 'user_id');
+    }
 }

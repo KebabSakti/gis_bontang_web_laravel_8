@@ -103,7 +103,11 @@ class OptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Option::findOrFail($id);
+        
+        $data->delete();
+
+        return redirect()->back()->with('message', 'Proses berhasil');
     }
 
     public function ajax(Request $request)
@@ -136,10 +140,15 @@ class OptionController extends Controller
             $data[] = [
                 $r->tag,
                 $r->name,
-                $status,
+                // $status,
                 Carbon::create($r->created_at)->format('d/m/Y H:i:s'),
                 Carbon::create($r->updated_at)->format('d/m/Y H:i:s'),
-                '<button type="button" class="btn btn-sm btn-info modal-trigger" data-target="'.route('option.edit', $r->id).'">Edit</button>',
+                '<button type="button" class="btn btn-sm btn-info modal-trigger" data-target="'.route('option.edit', $r->id).'">Edit</button>
+                <form method="POST" action="'.route('option.destroy', $r->id).'">
+                    <input type="hidden" name="_token" value="'.csrf_token().'">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-sm btn-danger confirm">Hapus</button>
+                 </form>',
             ];
         }
 

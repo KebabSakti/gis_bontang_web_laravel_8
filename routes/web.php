@@ -15,6 +15,9 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\FormulirController;
+use App\Http\Controllers\MapController;
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +43,8 @@ Route::get('video', [PublicPageController::class, 'video'])->name('publicpagecon
 Route::get('gallery', [PublicPageController::class, 'gallery'])->name('publicpagecontroller.gallery');
 Route::get('kontak', [PublicPageController::class, 'kontak'])->name('publicpagecontroller.kontak');
 Route::post('kontak', [PublicPageController::class, 'kontakSubmit'])->name('publicpagecontroller.kontaksubmit');
+Route::get('peta', [PublicPageController::class, 'peta'])->name('publicpagecontroller.peta');
+Route::post('peta', [PublicPageController::class, 'petaAjax'])->name('publicpagecontroller.petaajax');
 
 //USER ROUTE (REGISTERED USER)
 Route::get('user/', function () {
@@ -47,11 +52,13 @@ Route::get('user/', function () {
 });
 Route::group(['prefix' => 'user'], function () {
     //USER AUTH
-    Route::get('login', [UserAuthentication::class, 'login'])->name('auth.user.loginpage');
+    Route::get('login}', [UserAuthentication::class, 'login'])->name('auth.user.loginpage');
     Route::post('login', [UserAuthentication::class, 'loginSubmit'])->name('auth.user.loginsubmit');
+
     //USER FORM
     Route::get('form', [UserFormController::class, 'form'])->name('user.form');
     Route::post('form', [UserFormController::class, 'formSubmit'])->name('user.formsubmit');
+    Route::get('form/{form_id}/detail/{tag?}', [UserFormController::class, 'formDetail'])->name('user.formdetail');
 });
 
 //ADMIN ROUTE
@@ -63,6 +70,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('login', [AdminAuthentication::class, 'login'])->name('auth.admin.loginpage');
     Route::post('login', [AdminAuthentication::class, 'loginSubmit'])->name('auth.admin.loginsubmit');
     Route::get('logout', [AdminAuthentication::class, 'logout'])->name('auth.admin.logout');
+    Route::get('edit/{id}', [AdminAuthentication::class, 'edit'])->name('auth.admin.edit');
+    Route::match(['post', 'put'], 'edit/{id}', [AdminAuthentication::class, 'update'])->name('auth.admin.update');
+
     //ADMIN PAGES
     Route::get('beranda', [AdminPageController::class, 'beranda'])->name('admin.beranda');
     Route::post('option/ajax', [OptionController::class, 'ajax'])->name('option.ajax');
@@ -82,7 +92,17 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('pesan', ContactController::class);
     Route::post('gallery/ajax', [GalleryController::class, 'ajax'])->name('gallery.ajax');
     Route::resource('gallery', GalleryController::class);
+    Route::get('formulir/export', [FormulirController::class, 'export'])->name('formulir.export');
+    Route::post('formulir/export', [FormulirController::class, 'exportSubmit'])->name('formulir.exportsubmit');
     Route::post('formulir/ajax', [FormulirController::class, 'ajax'])->name('formulir.ajax');
     Route::get('formulir/{id}/id/{tag}/foto', [FormulirController::class, 'foto'])->name('formulir.foto');
     Route::resource('formulir', FormulirController::class);
+    Route::get('map', [MapController::class, 'index'])->name('map.index');
+    Route::get('map/create', [MapController::class, 'create'])->name('map.create');
+    Route::post('map', [MapController::class, 'ajax'])->name('map.ajax');
+    Route::post('map/save', [MapController::class, 'ajaxSave'])->name('map.ajaxsave');
+    Route::get('chart', [ChartController::class, 'index'])->name('chart.index');
+    Route::post('chart', [ChartController::class, 'ajax'])->name('chart.ajax');
+    Route::post('user/ajax', [UserController::class, 'ajax'])->name('user.ajax');
+    Route::resource('user', UserController::class);
 });

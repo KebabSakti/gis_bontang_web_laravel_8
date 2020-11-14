@@ -16,7 +16,7 @@ class UserFormController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('formDetail');
         // $this->middleware('optimizeImages')->only('formSubmit');
     }
 
@@ -37,7 +37,8 @@ class UserFormController extends Controller
             //store data
             $form = Form::create($request->except([
                 '_token',
-                'foto',
+                'foto_ktp',
+                'foto_kk',
                 'foto_pondasi',
                 'foto_kolom_balok',
                 'foto_konstruksi_atap',
@@ -56,11 +57,20 @@ class UserFormController extends Controller
             ]));
 
             //store and upload image
-            foreach($request->foto as $item) {
+            foreach($request->foto_ktp as $item) {
                 Foto::create([
                     'foto_id' => IDGenerator::generate(),
                     'form_id' => $request->form_id,
-                    'tag' => 'form',
+                    'tag' => 'foto_ktp',
+                    'foto' => FileUploader::uploadFoto($item),
+                ]);
+            }
+
+            foreach($request->foto_kk as $item) {
+                Foto::create([
+                    'foto_id' => IDGenerator::generate(),
+                    'form_id' => $request->form_id,
+                    'tag' => 'foto_kk',
                     'foto' => FileUploader::uploadFoto($item),
                 ]);
             }
@@ -202,6 +212,39 @@ class UserFormController extends Controller
         });
 
         return redirect()->back()->with('message', 'Data berhasil tersimpan');
+    }
+
+    public function formDetail($form_id, $tag = null)
+    {
+        $data = Form::where('form_id', $form_id)->first();
+        $tags = [
+            'foto_ktp' => 'KTP',
+            'foto_kk' => 'KK',
+            'pondasi' => 'Pondasi',
+            'kolom_balok' => 'Kondisi Kolom Balok',
+            'konstruksi_atap' => 'Kondisi Konstruksi Atap',
+            'jendela' => 'Jendela/Lubang Cahaya',
+            'ventilasi' => 'Ventilasi',
+            'kamar_mandi' => 'Kepemilikan Kamar Mandi dan Jamban',
+            'jarak_air' => 'Jarak Sumber Air Minum ke TPA Tinja',
+            'sumber_air' => 'Sumber Air Minum',
+            'sumber_listrik' => 'Sumber Listrik',
+            'material_atap' => 'Material Atap Terluas',
+            'kondisi_atap' => 'Kondisi Atap',
+            'material_dinding' => 'Material Dinding Terluas',
+            'kondisi_dinding' => 'Kondisi Dinding',
+            'material_lantai' => 'Material Lantai Terluas',
+            'kondisi_lantai' => 'Kondisi Lantai',
+        ];
+
+        if(empty($data)) {
+            abort('404');
+        }
+
+        return view('public.form_detail', [
+            'data' => $data,
+            'tags' => $tags,
+        ]);
     }
 
     private function uploadFoto($file)

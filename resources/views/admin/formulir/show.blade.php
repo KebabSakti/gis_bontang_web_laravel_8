@@ -24,28 +24,17 @@
             <input type="text" class="form-control" value="{{$data->provinsi}}" readonly>
         </div>
     </div>
-    <div class="item form-group">
-        <label class="col-form-label col-md-3 col-sm-3 label-align">FOTO</label>
-        <div class="col-md-6 col-sm-6 ">
-            <a data-fancybox-trigger="form" data-fancybox-index="0" href="javascript:;" class="btn btn-info"><i class="fa fa-picture-o fa-fw"></i> Foto</a>
-            @foreach ($data->fotos()->where('tag', 'form')->get() as $item)
-                <a data-fancybox="form" href="{{ asset('foto/'.$item->foto) }}">
-                    <img src="{{ asset('foto/'.$item->foto) }}" style="display: none;">
-                </a>
-            @endforeach
-        </div>
-    </div>
     <hr>
-    <div class="item form-group">
-        <label class="col-form-label col-md-3 col-sm-3 label-align">Nomor Urut</label>
-        <div class="col-md-6 col-sm-6 ">
-            <input type="text" class="form-control" value="{{$data->nomor_urut}}" readonly>
-        </div>
-    </div>
     <div class="item form-group">
         <label class="col-form-label col-md-3 col-sm-3 label-align">Nama Lengkap</label>
         <div class="col-md-6 col-sm-6 ">
             <input type="text" class="form-control" value="{{$data->nama_lengkap}}" readonly>
+        </div>
+    </div>
+    <div class="item form-group">
+        <label class="col-form-label col-md-3 col-sm-3 label-align">Kordinat</label>
+        <div class="col-md-6 col-sm-6 ">
+            <input type="text" class="form-control" value="{{$data->lat.' / '.$data->lng}}" readonly>
         </div>
     </div>
     <div class="item form-group">
@@ -77,6 +66,32 @@
         <div class="col-md-6 col-sm-6 ">
             <input type="text" class="form-control" value="{{$data->nik}}" readonly>
         </div>
+        @if (count($data->fotos()->where('tag', 'foto_ktp')->get()) > 0)
+            <div class="col-md-3 col-sm-3 ">
+                <a data-fancybox-trigger="nik" data-fancybox-index="0" href="javascript:;" class="btn btn-info"><i class="fa fa-picture-o fa-fw"></i> Foto</a>
+                @foreach ($data->fotos()->where('tag', 'foto_ktp')->get() as $item)
+                    <a data-fancybox="nik" href="{{ asset('foto/'.$item->foto) }}">
+                        <img src="{{ asset('foto/'.$item->foto) }}" style="display: none;">
+                    </a>
+                @endforeach
+            </div>
+        @endif
+    </div>
+    <div class="item form-group">
+        <label class="col-form-label col-md-3 col-sm-3 label-align">Nomor KK</label>
+        <div class="col-md-6 col-sm-6 ">
+            <input type="text" class="form-control" value="{{$data->no_kk}}" readonly>
+        </div>
+        @if (count($data->fotos()->where('tag', 'foto_kk')->get()) > 0)
+            <div class="col-md-3 col-sm-3 ">
+                <a data-fancybox-trigger="no_kk" data-fancybox-index="0" href="javascript:;" class="btn btn-info"><i class="fa fa-picture-o fa-fw"></i> Foto</a>
+                @foreach ($data->fotos()->where('tag', 'foto_kk')->get() as $item)
+                    <a data-fancybox="no_kk" href="{{ asset('foto/'.$item->foto) }}">
+                        <img src="{{ asset('foto/'.$item->foto) }}" style="display: none;">
+                    </a>
+                @endforeach
+            </div>
+        @endif
     </div>
     <div class="item form-group">
         <label class="col-form-label col-md-3 col-sm-3 label-align">Jumlah KK dalam 1 rumah</label>

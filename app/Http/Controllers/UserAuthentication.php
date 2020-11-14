@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserAuthentication extends Controller
 {
-    public function login()
+    public function login($redirect = null)
     {
         return view('public.login');
     }
@@ -16,7 +16,8 @@ class UserAuthentication extends Controller
     {
         $credential = Auth::attempt([
             'email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
+            'active' => 1,
         ]);
 
         if($credential) {

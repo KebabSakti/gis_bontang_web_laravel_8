@@ -104,7 +104,11 @@ class AreaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Area::findOrFail($id);
+        
+        $data->delete();
+
+        return redirect()->back()->with('message', 'Proses berhasil');
     }
 
     public function ajax(Request $request)
@@ -140,7 +144,12 @@ class AreaController extends Controller
                 $r->name,
                 Carbon::create($r->created_at)->format('d/m/Y H:i:s'),
                 Carbon::create($r->updated_at)->format('d/m/Y H:i:s'),
-                '<button type="button" class="btn btn-sm btn-info modal-trigger" data-target="'.route('area.edit', $r->id).'">Edit</button>',
+                '<button type="button" class="btn btn-sm btn-info modal-trigger" data-target="'.route('area.edit', $r->id).'">Edit</button>
+                <form method="POST" action="'.route('area.destroy', $r->id).'">
+                    <input type="hidden" name="_token" value="'.csrf_token().'">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-sm btn-danger confirm">Hapus</button>
+                 </form>',
             ];
         }
 

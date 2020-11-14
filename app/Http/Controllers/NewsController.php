@@ -167,7 +167,7 @@ class NewsController extends Controller
                 Str::limit($r->title, 100),
                 $r->tag,
                 Str::limit($r->content, 100),
-                $status,
+                // $status,
                 '<a href="'.asset('foto/' . $r->image).'" data-fancybox="gallery">
                     <img src="'.asset('foto/' . $r->image).'" width="100" class="img-thumbnail">
                  </a>',

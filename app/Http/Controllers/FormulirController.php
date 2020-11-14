@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\CustomClass\IDGenerator;
+use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use App\Models\Form;
 use App\Models\Foto;
+use App\Exports\FormExport;
+use PDF;
 
 class FormulirController extends Controller
 {
@@ -97,13 +100,15 @@ class FormulirController extends Controller
 
     public function ajax(Request $request)
     {
-        $col = ['name', 'kelurahan', 'kecamatan', 'kabupaten', 'provinsi', 'created_at', 'updated_at'];
+        $col = ['name', 'nama_lengkap', 'nik', 'kelurahan', 'kecamatan', 'kabupaten', 'provinsi', 'created_at', 'updated_at'];
 
         $query = DB::table('forms');
 
         if(!empty($request->search['value'])){
             $query->where(function($q) use($request, $col) {
                 $q->where('name', 'like', '%'.$request->search['value'].'%')
+                  ->orWhere('nama_lengkap', 'like', '%'.$request->search['value'].'%')
+                  ->orWhere('nik', 'like', '%'.$request->search['value'].'%')
                   ->orWhere('kelurahan', 'like', '%'.$request->search['value'].'%')
                   ->orWhere('kecamatan', 'like', '%'.$request->search['value'].'%')
                   ->orWhere('kabupaten', 'like', '%'.$request->search['value'].'%')
@@ -126,6 +131,8 @@ class FormulirController extends Controller
         foreach ($table as $r) {
             $data[] = [
                 $r->name,
+                $r->nama_lengkap,
+                $r->nik,
                 $r->kelurahan,
                 $r->kecamatan,
                 $r->kabupaten,
@@ -142,6 +149,35 @@ class FormulirController extends Controller
             'recordsFiltered' => $filter,
             'data' => $data
         ]);
+    }
+
+    public function export()
+    {
+        return view('admin.formulir.export_option');
+    }
+
+    public function exportSubmit(Request $request)
+    {
+        $range = explode('-', str_replace(' ', '', $request->periode));
+        $start = $range[0];
+        $end = $range[1];
+        $dateString = Carbon::createFromFormat('d/m/Y', $start, 'UTC')->format('d-m-Y').' - '.Carbon::createFromFormat('d/m/Y', $end, 'UTC')->format('d-m-Y');
+
+        $filename = 'Rekap '.$dateString;
+
+        if($request->format == 'excel') {
+            return Excel::download(new FormExport($start, $end), $filename.'.xlsx');
+        }else{
+            $dateStart = Carbon::createFromFormat('d/m/Y', $start, 'UTC')->format('Y-m-d');
+            $dateEnd = Carbon::createFromFormat('d/m/Y', $end, 'UTC')->format('Y-m-d');
+            
+            $data = Form::whereDate('created_at', '>=', $dateStart)
+                        ->whereDate('created_at', '<=', $dateEnd)
+                        ->get();
+
+            $pdf = PDF::loadView('admin.formulir.export_pdf', ['data' => $data]);
+            return $pdf->setpaper('a4', 'landscape')->download($filename.'.pdf');
+        }
     }
 
     public function foto($id, $tag)

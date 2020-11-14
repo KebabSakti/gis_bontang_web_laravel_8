@@ -30,7 +30,7 @@
                             <th>Judul</th>
                             <th>Tag</th>
                             <th>Konten</th>
-                            <th>Status</th>
+                            {{-- <th>Status</th> --}}
                             <th>Gambar</th>
                             <th>Viewer</th>
                             <th>Tanggal Post</th>
@@ -68,12 +68,12 @@ $(function() {
                 {'searchable':false, 'orderable':false},
                 {'searchable':false, 'orderable':true},
                 {'searchable':false, 'orderable':false},
-                {'searchable':false, 'orderable':true},
+                // {'searchable':false, 'orderable':true},
                 {'searchable':false, 'orderable':true},
                 {'searchable':false, 'orderable':true},
                 {'searchable':false, 'orderable':false},
             ],
-            order: [[6, "desc"]],
+            order: [[5, "desc"]],
             ajax: $.fn.dataTable.pipeline({
                 url: '{!! route('news.ajax') !!}',
                 method: 'POST',

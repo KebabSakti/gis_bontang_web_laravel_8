@@ -29,7 +29,7 @@
                         <tr>
                             <th>Tag</th>
                             <th>Nama</th>
-                            <th>Status</th>
+                            {{-- <th>Status</th> --}}
                             <th>Tanggal Post</th>
                             <th>Tanggal Update</th>
                             <th></th>
@@ -62,12 +62,12 @@ $(function() {
             columns:[
                 null,
                 null,
-                {'searchable':false, 'orderable':true},
+                // {'searchable':false, 'orderable':true},
                 {'searchable':false, 'orderable':true},
                 {'searchable':false, 'orderable':true},
                 {'searchable':false, 'orderable':false},
             ],
-            order: [[3, "desc"]],
+            order: [[2, "desc"]],
             ajax: $.fn.dataTable.pipeline({
                 url: '{!! route('option.ajax') !!}',
                 method: 'POST',

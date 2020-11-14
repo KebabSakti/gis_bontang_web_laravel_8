@@ -19,6 +19,11 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/r-2.2.6/datatables.min.css"/>
     <!-- FancyBox -->
     <link href="{{ asset('assets/js/fancybox-master/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
+    <!-- leaflet map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+    <!-- DT RANGE -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <!-- Admin Theme Style -->
     <link rel="stylesheet" href="{{ asset('assets/css/admin.min.css') }}">
     <style>
@@ -98,6 +103,11 @@
                           <i class="fa fa-home"></i> Beranda
                       </a>
                   </li>
+                  <li>
+                    <a href="{{ route('user.index') }}">
+                        <i class="fa fa-user"></i> User
+                    </a>
+                  </li>
                   <li><a><i class="fa fa-cog"></i> Master Data <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('option.index') }}">Formulir</a></li>
@@ -139,6 +149,16 @@
                         <i class="fa fa-newspaper-o"></i> Formulir
                     </a>
                   </li>
+                  <li>
+                    <a href="{{ route('chart.index') }}">
+                        <i class="fa fa-bar-chart"></i> Statistik
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('map.index') }}">
+                        <i class="fa fa-map-marker"></i> Peta
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -159,7 +179,7 @@
                       {{Auth::guard('admin')->user()->name}}
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item"  href="javascript:;"> Ganti Password</a>
+                        <a class="dropdown-item modal-trigger" data-target="{{ route('auth.admin.edit', ['id' => Auth::guard('admin')->user()->id]) }}" href="javascript:;"> Edit Detail Login</a>
                         <a class="dropdown-item"  href="{{ route('auth.admin.logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                     </div>
                   </li>
@@ -222,6 +242,14 @@
     <script type="text/javascript" src="{{ asset('assets/js/dtpipeline.js') }}"></script>
     <!-- fancybox -->
     <script src="{{ asset('assets/js/fancybox-master/dist/jquery.fancybox.min.js') }}"></script>
+    <!-- DT RANGE -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <!-- CHART JS -->
+    <script src="{{ asset('assets/vendors/chart/dist/Chart.min.js') }}"></script>
+    <!-- Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
     <!-- Masonry Staggered Grid -->
     {{-- <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> --}}

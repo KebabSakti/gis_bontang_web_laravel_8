@@ -16,6 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'name',
         'email',
         'password',
@@ -29,4 +30,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function forms()
+    {
+        return $this->hasMany('App\Models\Form', 'user_id', 'user_id');
+    }
 }
