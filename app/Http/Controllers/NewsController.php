@@ -138,7 +138,7 @@ class NewsController extends Controller
 
     public function ajax(Request $request)
     {
-        $col = ['title', 'tag', 'content', 'active', 'image', 'view', 'created_at', 'updated_at'];
+        $col = ['title', 'tag', 'content', 'image', 'view', 'created_at', 'updated_at'];
 
         $query = DB::table('news');
 
