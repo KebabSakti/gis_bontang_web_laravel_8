@@ -52,7 +52,7 @@ Route::get('user/', function () {
 });
 Route::group(['prefix' => 'user'], function () {
     //USER AUTH
-    Route::get('login}', [UserAuthentication::class, 'login'])->name('auth.user.loginpage');
+    Route::get('login', [UserAuthentication::class, 'login'])->name('auth.user.loginpage');
     Route::post('login', [UserAuthentication::class, 'loginSubmit'])->name('auth.user.loginsubmit');
 
     //USER FORM

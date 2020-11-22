@@ -98,7 +98,7 @@
                             <input type="text" name="lng" placeholder="Kordinat (Longitude)" class="single-input" required>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col col-md-2">
                         <div class="input-group mt-10">
                             <button type="button" class="genric-btn info radius lokasi">Lokasi</button>
                         </div>
